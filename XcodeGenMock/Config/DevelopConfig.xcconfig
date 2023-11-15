@@ -1,0 +1,20 @@
+//
+//  DevelopConfig.xcconfig
+//  XcodeGenMock
+//
+//  Created by JunHyeok Lee on 11/15/23.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "XcodeGenMock/Config/Project-Shared.xcconfig"
+#include "XcodeGenMock/Config/XcodeGenMock-Shared.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+
+PRODUCT_BUNDLE_IDENTIFIER = com.junhyeok.XcdoeGenMock
+
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = arm64
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE

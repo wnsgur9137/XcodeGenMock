@@ -1,0 +1,88 @@
+name: XcodeGenMock
+deploymentTarget:
+    iOS: 17.0
+options:
+    useBaseInternationalization: false
+    groupSortPosition: top # sort
+#    postGenCommand: pod install # Pod install
+configs:
+    Debug: Debug
+    Release: Release
+configFiles:
+    Debug: XcodeGenMock/Config/DevelopConfig.xcconfig
+    Release: XcodeGenMock/Config/ReleaseConfig.xcconfig
+fileGroups:
+    - XcodeGenMock/Config/Project-Shared.xcconfig
+    - XcodeGenMock/Config/XcodeGenMock-Shared.xcconfig
+schemes:
+    XcodeGenMock:
+        build:
+            targets:
+                XcodeGenMock: all
+        run:
+            config: Debug
+            environmentVariables:
+                OS_ACTIVITY_MODE: disable
+        test:
+            config: Debug
+            targets:
+                - XcodeGenMockTests
+                - XcodeGenMockUITests
+        profile:
+            config: Release
+        analyze:
+            config: Debug
+        archive:
+            config: Release
+            revealArchiveInOrganizer: true
+settings:
+    ENABLE_BITCODE: false
+targets:
+    XcodeGenMock:
+        platform: iOS
+        type: application
+        deploymentTarget: 17.0
+        settings:
+            base:
+#            CODE_SIGN_ENTITLEMENTS: XcodeGenMock/Resources/XcodeGenMock.entitlements
+            INFOPLIST_FILE: XcodeGenMock/Resources/Info.plist
+            CURRENT_PROJECT_VERSION: "1.0.0"
+            ENABLE_TESTABILITY: true
+            PRODUCT_NAME: "XcodeGenMock"
+        sources:
+#            - path: Resources/GoogleService-Info.plist
+            - path: XcodeGenMock/
+              excludes:
+                - "**/*.a"
+                - "**/*.framework"
+              type: group
+#        postBuildScripts:
+#            - runOnlyWhenInstalling: true
+#              inputFiles:
+#                - $(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
+#                - ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}
+#              script: |
+#                        "${PODS_ROOT}/FirebaseCrashlytics/run"
+#                        "${PODS_ROOT}/FirebaseCrashlytics/upload-symbols" -gsp "${PROJECT_DIR}/Resources/GoogleService-Info.plist" -p ios "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}"
+        #postCompileScripts:
+            #- script: |
+               #         "${PODS_ROOT}/SwiftLint/swiftlint"
+    XcodeGenMockTests:
+        platform: iOS
+        type: bundle.unit-test
+        deploymentTarget: 17.0
+        settings:
+            base:
+                INFOPLIST_FILE: Resources/Info.plist
+        sources:
+            - path: XcodeGenMockTests
+    XcodeGenMockUITests:
+        platform: iOS
+        type: bundle.ui-testing
+        deploymentTarget: 17.0
+        settings:
+            base:
+                INFOPLIST_FILE: Resources/Info.plist
+        sources:
+            - path: XcodeGenMockUITests
+
